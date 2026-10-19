@@ -50,7 +50,11 @@ router.get('/', async (req, res) => {
 
         const enchantments = await Enchantment.findAll({
             where,
-            order: [['name', 'ASC']]
+            order: [['name', 'ASC']],
+            include: [{
+                model: EnchantmentConflict,
+                as: 'conflicts',
+            }]
         });
 
         return res.json(enchantments);
