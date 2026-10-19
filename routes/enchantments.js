@@ -54,6 +54,11 @@ router.get('/', async (req, res) => {
             include: [{
                 model: EnchantmentConflict,
                 as: 'conflicts',
+                include: [{
+                    model: Enchantment,
+                    as: 'conflictsWith',
+                    attributes: ['id', 'name', 'source', 'max_level']
+                }]
             }]
         });
 
