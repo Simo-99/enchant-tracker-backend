@@ -1,14 +1,33 @@
 require('dotenv').config();
 
 const express = require('express');
-const cors = require('cors'); // <-- 1. Importa il pacchetto cors
+const cors = require('cors');
 const sequelize = require('./config/database');
 require('./models/associations');
 
 const app = express();
 
-// <-- 2. Abilita CORS per permettere al frontend (es. localhost:5173) di comunicare
-app.use(cors());
+// Configurazione CORS avanzata e sicura per Netlify e sviluppo locale
+const allowedOrigins = [
+    process.env.FRONTEND_URL,          // Es. configurabile su Render
+    'https://litness.netlify.app',     // Il tuo dominio Netlify attuale
+    'http://localhost:5173',           // Vite dev server locale
+    'http://localhost:3000'
+].filter(Boolean);
+
+app.use(cors({
+    origin: function (origin, callback) {
+        // Permette richieste senza origin (es. Postman, cURL o app mobile)
+        if (!origin) return callback(null, true);
+        
+        if (allowedOrigins.indexOf(origin) !== -1 || process.env.NODE_ENV !== 'production') {
+            callback(null, true);
+        } else {
+            callback(new Error('Bloccato da policy CORS: Origine non consentita'));
+        }
+    },
+    credentials: true
+}));
 
 app.use(express.json());
 
@@ -30,7 +49,7 @@ async function startServer() {
         console.log('Connessione al database riuscita');
 
         app.listen(PORT, () => {
-            console.log(`Server attivo su http://localhost:${PORT}`);
+            console.log(`Server attivo sulla porta ${PORT}`);
         });
     } catch (error) {
         console.error('Errore di connessione al database:', error.message);
