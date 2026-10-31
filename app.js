@@ -2,7 +2,6 @@ require('dotenv').config();
 
 const express = require('express');
 const cors = require('cors');
-const methodOverride = require('method-override');
 const sequelize = require('./config/database');
 require('./models/associations');
 
@@ -33,7 +32,6 @@ app.use(cors({
 app.use(express.json());
 
 // Supporto per X-HTTP-Method-Override header (per client che non supportano PATCH nativamente)
-app.use(methodOverride('X-HTTP-Method-Override'));
 
 app.get('/', (req, res) => {
     res.json({ message: 'API Enchantments attiva' });
