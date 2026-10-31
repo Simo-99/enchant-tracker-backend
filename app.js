@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const express = require('express');
 const cors = require('cors');
+const methodOverride = require('method-override');
 const sequelize = require('./config/database');
 require('./models/associations');
 
@@ -19,7 +20,7 @@ app.use(cors({
     origin: function (origin, callback) {
         // Permette richieste senza origin (es. Postman, cURL o app mobile)
         if (!origin) return callback(null, true);
-        
+
         if (allowedOrigins.indexOf(origin) !== -1 || process.env.NODE_ENV !== 'production') {
             callback(null, true);
         } else {
@@ -30,6 +31,9 @@ app.use(cors({
 }));
 
 app.use(express.json());
+
+// Supporto per X-HTTP-Method-Override header (per client che non supportano PATCH nativamente)
+app.use(methodOverride('X-HTTP-Method-Override'));
 
 app.get('/', (req, res) => {
     res.json({ message: 'API Enchantments attiva' });
