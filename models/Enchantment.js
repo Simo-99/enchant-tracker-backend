@@ -51,7 +51,15 @@ const Enchantment = sequelize.define('Enchantment', {
 
     shield: boolField(),
     fishing_rod: boolField(),
-    elytra: boolField()
+    elytra: boolField(),
+    type: {        
+        type: DataTypes.TEXT,
+        allowNull: true
+    },
+    cost: {
+        type: DataTypes.INTEGER.UNSIGNED,
+        allowNull: true
+    },
 }, {
     tableName: 'enchantments',
     timestamps: false,
