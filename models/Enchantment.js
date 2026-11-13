@@ -1,69 +1,34 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
-const boolField = () => ({
-    type: DataTypes.BOOLEAN,
-    allowNull: false,
-    defaultValue: false
-});
-
 const Enchantment = sequelize.define('Enchantment', {
-    id: {
-        type: DataTypes.INTEGER.UNSIGNED,
-        primaryKey: true,
-        autoIncrement: true
-    },
-    name: {
-        type: DataTypes.STRING(100),
-        allowNull: false
-    },
-    source: {
-        type: DataTypes.ENUM('vanilla', 'custom'),
-        allowNull: false
-    },
-    max_level: {
-        type: DataTypes.INTEGER.UNSIGNED,
-        allowNull: true
-    },
-    description: {
-        type: DataTypes.TEXT,
-        allowNull: true
-    },
-    found: {
-        ...boolField()
-    },
-
-    sword: boolField(),
-    axe: boolField(),
-    pickaxe: boolField(),
-    shovel: boolField(),
-    hoe: boolField(),
-
-    helmet: boolField(),
-    chestplate: boolField(),
-    leggings: boolField(),
-    boots: boolField(),
-
-    bow: boolField(),
-    crossbow: boolField(),
-    trident: boolField(),
-    mace: boolField(),
-
-    shield: boolField(),
-    fishing_rod: boolField(),
-    elytra: boolField(),
-    type: {        
-        type: DataTypes.TEXT,
-        allowNull: true
-    },
-    cost: {
-        type: DataTypes.INTEGER.UNSIGNED,
-        allowNull: true
-    },
+    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    name: { type: DataTypes.STRING, allowNull: false },
+    source: { type: DataTypes.STRING, allowNull: false },
+    max_level: { type: DataTypes.INTEGER, allowNull: false },
+    description: { type: DataTypes.TEXT },
+    found: { type: DataTypes.BOOLEAN, defaultValue: false },
+    sword: { type: DataTypes.BOOLEAN, defaultValue: false },
+    axe: { type: DataTypes.BOOLEAN, defaultValue: false },
+    pickaxe: { type: DataTypes.BOOLEAN, defaultValue: false },
+    shovel: { type: DataTypes.BOOLEAN, defaultValue: false },
+    hoe: { type: DataTypes.BOOLEAN, defaultValue: false },
+    helmet: { type: DataTypes.BOOLEAN, defaultValue: false },
+    chestplate: { type: DataTypes.BOOLEAN, defaultValue: false },
+    leggings: { type: DataTypes.BOOLEAN, defaultValue: false },
+    boots: { type: DataTypes.BOOLEAN, defaultValue: false },
+    bow: { type: DataTypes.BOOLEAN, defaultValue: false },
+    crossbow: { type: DataTypes.BOOLEAN, defaultValue: false },
+    trident: { type: DataTypes.BOOLEAN, defaultValue: false },
+    mace: { type: DataTypes.BOOLEAN, defaultValue: false },
+    shield: { type: DataTypes.BOOLEAN, defaultValue: false },
+    fishing_rod: { type: DataTypes.BOOLEAN, defaultValue: false },
+    elytra: { type: DataTypes.BOOLEAN, defaultValue: false },
+    type: { type: DataTypes.STRING(1), allowNull: false },
+    cost: { type: DataTypes.INTEGER, allowNull: false }
 }, {
-    tableName: 'enchantments',
-    timestamps: false,
-    freezeTableName: true
+    tableName: 'Enchantments',
+    timestamps: false
 });
 
 module.exports = Enchantment;
