@@ -21,6 +21,7 @@ const Enchantment = sequelize.define('Enchantment', {
     crossbow: { type: DataTypes.BOOLEAN, defaultValue: false },
     trident: { type: DataTypes.BOOLEAN, defaultValue: false },
     mace: { type: DataTypes.BOOLEAN, defaultValue: false },
+    spear: { type: DataTypes.BOOLEAN, defaultValue: false },
     shield: { type: DataTypes.BOOLEAN, defaultValue: false },
     fishing_rod: { type: DataTypes.BOOLEAN, defaultValue: false },
     elytra: { type: DataTypes.BOOLEAN, defaultValue: false },
