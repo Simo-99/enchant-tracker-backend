@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const controller = require('../controllers/enchantmentConflict');
+const controller = require('../controllers/conflict');
 
 // GET /api/enchantment-conflicts
 router.get('/', controller.getAll);

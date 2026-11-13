@@ -1,6 +1,6 @@
 const sequelize = require('../config/database');
 const Enchantment = require('./Enchantment');
-const EnchantmentConflict = require('./EnchantmentConflict');
+const EnchantmentConflict = require('./conflict');
 
 // Definizione delle associazioni Sequelize
   Enchantment.belongsToMany(Enchantment, {

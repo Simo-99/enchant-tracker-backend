@@ -18,13 +18,13 @@ const get = async (req, res) => {
 };
 
 // CREATE
-const storeModello = async (req, res) => {
+const storeConflitto = async (req, res) => {
     const conflict = await EnchantmentConflict.create(req.body);
     res.status(201).json(conflict);
 };
 
 // UPDATE
-const updateModello = async (req, res) => {
+const updateConflitto = async (req, res) => {
     const conflict = await EnchantmentConflict.findByPk(req.params.id);
 
     if (!conflict)
@@ -38,7 +38,7 @@ const updateModello = async (req, res) => {
 };
 
 // DELETE
-const deleteModello = async (req, res) => {
+const deleteConflitto = async (req, res) => {
     const conflict = await EnchantmentConflict.findByPk(req.params.id);
 
     if (!conflict)
@@ -48,4 +48,4 @@ const deleteModello = async (req, res) => {
     res.json({ message: 'Conflitto eliminato con successo' });
 };
 
-module.exports = { getAll, get, storeModello, updateModello, deleteModello };
+module.exports = { getAll, get, storeConflitto, updateConflitto, deleteConflitto };
