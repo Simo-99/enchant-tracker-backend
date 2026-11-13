@@ -39,16 +39,25 @@ const storeModello = async (req, res) => {
 
 // UPDATE
 const updateModello = async (req, res) => {
-    const enchantment = await Enchantment.findByPk(req.params.id);
+    try {
+        const { id } = req.params;
+        const enchantment = await Enchantment.findByPk(id);
 
-    if (!enchantment)
-        return res.status(404).json({ error: 'Incantesimo non trovato' });
+        if (!enchantment) {
+            return res.status(404).json({ error: 'Incantesimo non trovato' });
+        }
 
-    const { name, type, source, found } = req.body;
-    Object.assign(enchantment, { name, type, source, found });
+        // Aggiorna solo i campi che sono stati realmente inviati nel body
+        // (es. se mandi solo { found: true }, aggiornerà solo found)
+        await enchantment.update(req.body, { 
+            fields: Object.keys(req.body) // Dice a Sequelize di toccare solo i campi passati
+        });
 
-    await enchantment.save();
-    res.json(enchantment);
+        return res.json(enchantment);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: error.message });
+    }
 };
 
 // DELETE

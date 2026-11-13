@@ -13,7 +13,6 @@ router.post('/', controller.storeModello);
 
 // PATCH /api/enchantments/:id/found (retrocompatibilità) e PUT/PATCH /:id
 router.patch('/:id/found', controller.updateModello);
-router.patch('/:id', controller.updateModello);
 router.put('/:id', controller.updateModello);
 
 // DELETE /api/enchantments/:id
